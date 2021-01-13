@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+
+	<style>
+		body {
+			min-height: 100%;
+			min-width: 100%;
+			background-color: bisque;
+			font-family: Biryani, sans-serif;
+		}
+	</style>
+
+	<style>
+		.ms-help-widget {
+			font-family: Biryani, sans-serif;
+			position: fixed;
+			left: auto;
+			top: auto;
+			right: 0%;
+			bottom: 0%;
+			z-index: 999;
+			display: block;
+			width: 0px;
+			height: 0px;
+		}
+
+		.ms-help-widget_open {
+			position: fixed;
+			left: auto;
+			top: auto;
+			right: 15px;
+			bottom: 14px;
+			z-index: 999;
+			width: 56px;
+			height: 56px;
+			padding-top: 0px;
+			padding-left: 0px;
+			border-style: solid;
+			border-width: 1px;
+			border-color: #d8e3f0;
+			border-radius: 50%;
+			background-color: #fff;
+			background-image: url("https://assets.website-files.com/5be2fa35a6796462795d8502/5d39c933eeeaad77380f034f_Orion_lifebelt%20(1).svg");
+			background-position: 50% 50%;
+			background-size: 32px;
+			background-repeat: no-repeat;
+			box-shadow: 0 20px 20px -6px rgba(45, 62, 80, 0.25);
+			opacity: 1;
+			-webkit-transition: bottom 200ms ease, border-color 200ms ease, box-shadow 200ms ease, color 200ms ease;
+			transition: bottom 200ms ease, border-color 200ms ease, box-shadow 200ms ease, color 200ms ease;
+			font-size: 12px;
+			font-weight: 700;
+			cursor: pointer;
+		}
+
+		.ms-help-widget_open:hover {
+			bottom: 16px;
+			border-color: rgba(42, 168, 255, 0.5);
+			background-color: #f5f8fd;
+			box-shadow: 0 20px 15px -3px rgba(45, 62, 80, 0.25);
+		}
+
+		.ms-help-widget_close {
+			position: absolute;
+			left: 3px;
+			top: 3px;
+			right: 3px;
+			bottom: 3px;
+			display: none;
+			border-radius: 50%;
+			background-color: #fff;
+			background-image: url(https://assets.website-files.com/5be2fa35a6796462795d8502/5d840937aebbc362b710a8c2_exit.svg);
+			background-position: 50% 50%;
+			background-size: 20px;
+			background-repeat: no-repeat;
+		}
+
+		.ms-help-widget_close.--show {
+			display: block !important;
+		}
+
+		.ms-help-widget_menu {
+			position: fixed;
+			left: auto;
+			right: 15px;
+			bottom: -10px;
+			z-index: 3;
+			width: 240px;
+			margin-bottom: 70px;
+			padding: 5px;
+			border: 1px solid #dbe2eb;
+			border-radius: 4px;
+			background-color: #fff;
+			box-shadow: 4px 4px 12px 0 rgba(45, 62, 80, 0.12);
+			line-height: 2.2;
+			font-size: 12.5px;
+			pointer-events: none;
+			opacity: 0;
+			transition:opacity .2s ease, bottom .2s ease-in;
+			-webkit-transition: opacity .2s  ease, bottom .1s ease-in;
+			-moz-transition: opacity .2s  ease, bottom .1s ease-in;
+			-o-transition: opacity .2s  ease, bottom .1s ease-in;
+		}
+
+		.ms-help-widget_menu.--show {
+			pointer-events: all;
+			opacity: 1;
+			bottom: 11px;
+		}
+
+
+		.ms-help-widget_menu a {
+			position: relative;
+			z-index: 1;
+			display: -webkit-box;
+			display: -webkit-flex;
+			display: -ms-flexbox;
+			display: flex;
+			width: auto;
+			max-width: 100%;
+			max-height: 56px;
+			padding-top: 5px;
+			padding-right: 12px;
+			padding-left: 10px;
+			-webkit-box-pack: start;
+			-webkit-justify-content: flex-start;
+			-ms-flex-pack: start;
+			justify-content: flex-start;
+			-webkit-box-align: center;
+			-webkit-align-items: center;
+			-ms-flex-align: center;
+			align-items: center;
+			border-radius: 4px;
+			-webkit-transition: background-color 300ms ease, color 200ms ease;
+			transition: background-color 300ms ease, color 200ms ease;
+			color: #192a33;
+			text-decoration: none;
+		}
+
+		.ms-help-widget_menu a:hover {
+			z-index: 2;
+			background-color: rgba(174, 222, 255, 0.5);
+			-webkit-transition: background-color 600ms ease, color 200ms ease;
+			transition: background-color 600ms ease, color 200ms ease;
+		}
+
+		.ms-help-widget_menu_search {
+			margin-top: 5px;
+			margin-bottom: 10px;
+			margin-left: 2px;
+			border-color: #d8e3f0;
+			background-color: #f5f8fd;
+			box-shadow: inset 0 1px 3px 0 rgba(45, 62, 80, 0.12) !important;
+			max-height: 33px !important;
+			padding: 5px 9px 0px 15px;
+			border-style: solid;
+			border-width: 1px;
+			-webkit-transition: box-shadow 200ms ease, background-color 200ms ease, border-color 200ms ease;
+			transition: box-shadow 200ms ease, background-color 200ms ease, border-color 200ms ease;
+			font-size: 13px;
+			font-weight: 400;
+		}
+
+		.ms-help-widget_menu_search_button {
+			position: absolute;
+			left: auto;
+			top: -1px;
+			right: 0;
+			bottom: -1px;
+			width: 38px;
+			padding-top: 7px;
+			border-radius: 0px 3px 3px 0px;
+			font-size: 20px;
+			background-color: #2aa8ff;
+			box-shadow: 0 15px 25px -10px rgba(13, 97, 182, 0.25);
+			-webkit-transition: background-color 200ms ease, box-shadow 200ms ease, color 200ms ease, border-color 200ms ease;
+			transition: background-color 200ms ease, box-shadow 200ms ease, color 200ms ease, border-color 200ms ease;
+			color: #fff;
+			line-height: 1em;
+			font-weight: 700;
+			text-align: center;
+		}
+
+		.ms-help-widget_menu a img {
+			position: relative;
+			width: 19px;
+			margin-top: -5px;
+			margin-right: 10px;
+			border-radius: 3px;
+			opacity: 0.65;
+			color: #f3f4f5;
+		}
+
+		.ms-help-widget_menu_bottom {
+			left: auto;
+			right: 22px;
+			top: auto;
+			bottom: -5px;
+			position: absolute;
+			z-index: 1;
+			width: 12px;
+			height: 12px;
+			margin-right: auto;
+			margin-left: auto;
+			border-style: solid;
+			border-width: 1px;
+			border-color: #d8e3f0;
+			border-radius: 2px;
+			background-color: #fafbfe;
+			-webkit-transform: rotate(45deg);
+			-ms-transform: rotate(45deg);
+			transform: rotate(45deg);
+		}
+
+		.ms-help-widget_menu_bottom_cover {
+			position: absolute;
+			left: 0%;
+			top: auto;
+			right: 0%;
+			bottom: 0%;
+			z-index: 2;
+			height: 10px;
+			border-radius: 5px;
+			background-color: #fff;
+		}
+
+		.ms-help-widget_divider {
+			display: block;
+			height: 1px;
+			margin: 10px 60px 10px 20px;
+			background-color: #d8e3f0;
+			opacity: 0.5;
+			margin: 4px 10px;
+		}
+
+		.ms-help-widget_bottom {
+			position: relative;
+			z-index: 2;
+			margin: 5px -5px -4px;
+			padding-top: 5px;
+			padding-left: 18px;
+			border-top: 1px solid #d8e3f0;
+			opacity: 0.5;
+			font-size: 10px;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="ms-help-widget">
+		<div class="ms-help-widget_menu">
+			<a href="https://help.memberstack.com/en" target="_blank" class="ms-help-widget_menu_search">
+				<img src="https://assets.website-files.com/5be2fa35a6796462795d8502/5edead7d19badb9b9f967df0_search-5667_a8e43cc6-4999-42ce-91e5-374ec6671433.svg" alt="">
+				<div class="ms-help-widget_menu_search_text">Search Help Center...</div>
+				<div class="ms-help-widget_menu_search_button">→ </div>
+			</a>
+			<div class="ms-help-widget_divider"></div>
+			<a href="https://future.memberstack.com/problems" target="_blank">
+				<img src="https://assets.website-files.com/5be2fa35a6796462795d8502/5edead7d88762714191afbfa_add-circle-336_fe4ed26e-15d0-4df9-82d6-6c6ce39a384f.svg" alt="">
+				<div>Roadmap &amp; wishlist</div>
+			</a>
+			<a href="https://community.memberstack.com/c/features" target="_blank">
+				<img src="https://assets.website-files.com/5be2fa35a6796462795d8502/5edead7e6d1c253a819086c0_add-folder-5167_054bae42-c198-4a57-b7fd-dcad2d1c7010.svg" alt="">
+				<div>Product updates</div>
+			</a>
+			<div class="ms-help-widget_divider"></div>
+			<a href="http://memberstack.com/hire" target="_blank">
+				<img src="https://assets.website-files.com/5be2fa35a6796462795d8502/5f45532054b8dc3fc8601f0a_Orion_lady.svg" alt="">
+				<div>Hire an expert</div>
+			</a>
+			<a href="https://twitter.com/MemberstackApp" target="_blank">
+				<img src="https://assets.website-files.com/5be2fa35a6796462795d8502/5edeb57c71271bbebc88d661_Orion_twitter.svg" alt="">
+				<div>Twitter - @Memberstackapp</div>
+			</a>
+			<a href="https://www.memberstack.com/legal/terms-of-service" target="_blank">
+				<img src="https://assets.website-files.com/5be2fa35a6796462795d8502/5fadf1ea19778bfe6b635976_noun_legal_3383626%20(1).svg" alt="">
+				<div>Terms &amp;&nbsp;privacy</div>
+			</a>
+			<!-- <a href="http://forum.memberstack.io" target="_blank">
+				<img src="https://assets.website-files.com/5be2fa35a6796462795d8502/5edead7dd990ec1cfcf17b68_chats-4873_9f85936c-6358-4025-806c-bc9aff89e0b4.svg" alt="">
+				<div>Support Forum</div>
+			</a> -->
+			<!-- <a href="mailto:support@memberstack.io?subject=Hi%20Memberstack%20Team%20%F0%9F%91%8B">
+				<img src="https://assets.website-files.com/5be2fa35a6796462795d8502/5f4552c2189b3835bd9b1901_Orion_mail.svg" alt="">
+				<div>support@memberstack.io</div>
+			</a> -->
+			<!-- <a href="#" target="_blank" class="long-nav-link smaller ms-intercom w-inline-block" >
+				<img src="https://assets.website-files.com/5be2fa35a6796462795d8502/5edeac248876279bf51af74f_Orion_code-bug.svg" alt="">
+				<div>Bug report</div>
+			</a> -->
+			<!-- <a href="https://airtable.com/shrRcUiSyovf6xnLb" target="_blank">
+				<img src="https://assets.website-files.com/5be2fa35a6796462795d8502/5edead7d88762714191afbfa_add-circle-336_fe4ed26e-15d0-4df9-82d6-6c6ce39a384f.svg" alt="">
+				<div>Feature request</div>
+			</a> -->
+						<!-- <a href="https://community.memberstack.com/c/community-support" target="_blank">
+				<img src="https://assets.website-files.com/5be2fa35a6796462795d8502/5edead7dd990ec1cfcf17b68_chats-4873_9f85936c-6358-4025-806c-bc9aff89e0b4.svg" alt="">
+				<div>Ask the community</div>
+			</a> -->
+			<!-- <a href="/plans" class="long-nav-link w-inline-block">
+				<img src="https://assets.website-files.com/5be2fa35a6796462795d8502/5fadeca4015c6e35e4084556_Drag.svg" alt="">
+				<div><span class="link">Upgrade </span>| Send a message</div>
+			</a> -->
+			<!-- <a href="#">
+				<img src="https://assets.website-files.com/5be2fa35a6796462795d8502/5fadeca4015c6e35e4084556_Drag.svg" alt="">
+				<div>Send a message</div>
+			</a> -->
+
+
+			<div class="ms-help-widget_menu_bottom"></div>
+			<div class="ms-help-widget_menu_bottom_cover"></div>
+			<div class="ms-help-widget_bottom">
+				<div>Memberstack Inc.</div>
+			</div>
+		</div>
+		<!-- <div data-w-id="86972b8c-3a47-7aea-3474-0f2444bd259d" class="help-center-icon hide">
+			<div class="close-help-icon" style="display: block;"></div>
+			<div>Need help?</div>
+		</div> -->
+		<!-- <div data-hover="" data-delay="0" class="feedback-dropdown temp w-dropdown">
+			<div id="w-dropdown-toggle-4" aria-controls="w-dropdown-list-4" aria-haspopup="menu" aria-expanded="false" role="button" tabindex="0" class="text-field feedback w-dropdown-toggle"><img src="https://assets.website-files.com/5be2fa35a6796462795d8502/5ec6d5824885f07e05325d0d_Orion_paper-plane.svg" alt="" class="feebback-img">
+				<div class="inline-block">Send Feedback</div>
+				<div class="_13px-2">Nevermind</div>
+			</div>
+			<nav id="w-dropdown-list-4" aria-labelledby="w-dropdown-toggle-4" class="feedback-list w-dropdown-list">
+				<div class="w-form">
+					<form id="wf-form-App-Feedback" name="wf-form-App-Feedback" data-name="App Feedback" class="relative"><label>Your feedback goes directly to the product team 👍</label><textarea placeholder="Suggestion, comment, bug, etc. Please use the forum or chat for faster support." maxlength="5000" id="feedback" name="feedback" data-name="Feedback" required="required" class="text-field text-area feedback w-input"></textarea>
+						<div class="w-embed"><input type="hidden" name="email" value="josh@memberstack.io"> <input type="hidden" name="website-name" value="Work Life Balance"> <input type="hidden" name="website-url"> <input type="hidden" name="user-name" value="Josh Lopez"> <input type="hidden" name="user-name" value="5e9dfe2c8b981e0017e70e30"></div><input type="submit" value="Send to the product team →" data-wait="Please wait..." class="button-3 small-add-url-button w-button"></form>
+					<div class="form-success-2 w-form-done">
+						<div>Feedback sent &nbsp;✈️<br><span class="field-description-2">Please refresh the page to submit again.</span></div>
+					</div>
+					<div class="w-form-fail">
+						<div>Oops! Something went wrong while submitting the form.</div>
+					</div>
+				</div>
+			</nav>
+		</div> -->
+		<a href="#" class="ms-help-widget_open">
+			<div class="ms-help-widget_close"></div>
+		</a>
+	</div>
+
+	<script>
+		let msHelpWidgetButton = document.querySelector(".ms-help-widget_open");
+		let msHelpWidgetButtonClose = document.querySelector(".ms-help-widget_close");
+		let msHelpWidgetMenu = document.querySelector(".ms-help-widget_menu");
+		msHelpWidgetButton.addEventListener("click", function () {
+			msHelpWidgetButtonClose.classList.toggle("--show");
+			msHelpWidgetMenu.classList.toggle("--show");
+		});
+
+		// var msDarkThemeToggle = document.querySelector(".ms-dark-theme-toggle");
+		// msDarkThemeToggle.addEventListener("click", function() {
+		// 	document.body.classList.toggle("dark-mode");
+		// });
+	</script>
+</body>
+
+</html>
